@@ -38,6 +38,6 @@ function onFormSubmit(e) {
       ? (formData.message = dataState.message)
       : (formData.message = '');
   }
-  email.value = dataState.email;
-  message.value = dataState.message;
+  email.value = formData.email;
+  message.value = formData.message;
 })();
