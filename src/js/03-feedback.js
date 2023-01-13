@@ -24,9 +24,11 @@ function onFormSubmit(e) {
   }
 
   e.currentTarget.reset();
-  console.log(dataState);
+  console.log(formData);
 
   localStorage.removeItem('feedback-form-state');
+  formData.email = '';
+  formData.message = '';
 }
 
 (function dataFromLocalStorage() {
