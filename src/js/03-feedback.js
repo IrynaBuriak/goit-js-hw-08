@@ -1,4 +1,5 @@
 import { throttle } from 'lodash';
+import Notiflix from 'notiflix';
 
 const form = document.querySelector('.feedback-form');
 const email = document.querySelector('.feedback-form input');
@@ -16,20 +17,27 @@ function onFormData(e) {
 }
 
 function onFormSubmit(e) {
-  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
   e.preventDefault();
   if (e.target.email.value === '' || e.target.message.value === '') {
-    alert('Заполните поле');
+    Notiflix.Notify.warning('Please, enter email and message');
     return;
   }
 
   e.currentTarget.reset();
+  console.log(dataState);
+
   localStorage.removeItem('feedback-form-state');
 }
 
 (function dataFromLocalStorage() {
   if (dataState) {
-    email.value = dataState.email;
-    message.value = dataState.message;
+    dataState.email
+      ? (formData.email = dataState.email)
+      : (formData.email = '');
+    dataState.message
+      ? (formData.message = dataState.message)
+      : (formData.message = '');
   }
+  email.value = dataState.email;
+  message.value = dataState.message;
 })();
