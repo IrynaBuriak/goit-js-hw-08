@@ -17,6 +17,7 @@ function onFormData(e) {
 }
 
 function onFormSubmit(e) {
+  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
   e.preventDefault();
   if (e.target.email.value === '' || e.target.message.value === '') {
     Notiflix.Notify.warning('Please, enter email and message');
@@ -24,22 +25,13 @@ function onFormSubmit(e) {
   }
 
   e.currentTarget.reset();
-  console.log(formData);
 
   localStorage.removeItem('feedback-form-state');
-  formData.email = '';
-  formData.message = '';
 }
 
 (function dataFromLocalStorage() {
   if (dataState) {
-    dataState.email
-      ? (formData.email = dataState.email)
-      : (formData.email = '');
-    dataState.message
-      ? (formData.message = dataState.message)
-      : (formData.message = '');
+    formData.email = dataState.email || '';
+    formData.message = dataState.message || '';
   }
-  email.value = formData.email;
-  message.value = formData.message;
 })();
