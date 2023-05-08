@@ -9,7 +9,7 @@ const dataState = JSON.parse(localStorage.getItem('feedback-form-state'));
 form.addEventListener('input', throttle(onFormData, 500));
 form.addEventListener('submit', onFormSubmit);
 
-const formData = {};
+let formData = {};
 
 function onFormData(e) {
   formData[e.target.name] = e.target.value;
@@ -25,8 +25,8 @@ function onFormSubmit(e) {
   }
 
   e.currentTarget.reset();
-
   localStorage.removeItem('feedback-form-state');
+  formData = {};
 }
 
 (function dataFromLocalStorage() {
